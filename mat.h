@@ -33,6 +33,7 @@ void mult(char *arg);
 void cdiv(char *arg);
 void out(char *arg);
 void assign(char *arg);
+void print(char *arg);
 
 int isint(char *tok);
 

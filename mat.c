@@ -13,9 +13,9 @@
  */
 
 context con = {OFF, MODE_EMPTY, 0, 0, 1};
-char *commandList[] = {"+", "-", "*", "/", "o", ":"};
-int commandCount = 6;
-void (*funcList[]) (char *) = {add, subt, mult, cdiv, out, assign};
+char *commandList[] = {"+", "-", "*", "/", "r", ":", "output"};
+int commandCount = 7;
+void (*funcList[]) (char *) = {add, subt, mult, cdiv, out, assign, print};
 
 int findseq(char *str, char *fndlist[], int range) {
 	for (int i = 0; i < range; i++) {
@@ -29,13 +29,15 @@ int getCommandType(char *tok) {
 }
 
 void interpret(char *tok) {
-	if ( !strcmp(tok, "\n") )
+	if ( !strcmp(tok, "\n") && con.commandOn == ON )
 			con.line++;
 	else  {
 		if ( getCommandType(tok) != ERROR ) {	
 			con.commandOn = ON;
 			con.mode = getCommandType(tok);
 		}
+		else 
+			con.commandOn = OFF;	
 		execCommand(con.mode, tok);
    	}	
 }
@@ -97,4 +99,10 @@ void assign(char *arg) {
 
 void out(char *arg) {
 	printf("%d\n", con.acc);
+	con.mode = MODE_EMPTY;
+}
+
+void print(char *arg) {
+	if ( !strcmp(arg, "output") ) return;
+	printf("%s", arg);
 }
