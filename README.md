@@ -1,0 +1,2 @@
+# mat
+Mathematical automaton language
