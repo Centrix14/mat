@@ -24,4 +24,7 @@ Here, in the first line, we put the automaton in the "output state", and after t
 
 > An important reminder: after setting the state, everything that is not a command for changing the state is considered data.
 
+## Implementations
+The mat language has 2 implementations: mpi (mat file interpreter) and mi2 (interactive mat interpreter). The first mfi is a Mat interpreter that executes code from a file, and the mi2 interpreter works interactively.
+
 # That's all for now, because the language is still in development. I admit, this language is very ugly, but it is research, and will not be used in real programs, it can be said that it is a toy.
