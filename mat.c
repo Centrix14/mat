@@ -6,11 +6,19 @@
 #include "mattok.h"
 
 /*
- * Mathematical AuTomaton language
+ * Minimalistic AutomaTon language
  * This file contains the Mat interpreter
- * v0.1.1
- * by Centrix 19.07.2019
+ * v0.2.1
+ * by Centrix 20.07.2019
  */
+
+enum states {
+	ADD = 0,
+	SUBT,
+	MULT,
+	DIV,
+	ASSIGN = 5		
+};
 
 context con = {OFF, MODE_EMPTY, 0, 0, 1};
 char *commandList[] = {"+", "-", "*", "/", "r", ":", "output"};
@@ -49,53 +57,28 @@ void execCommand(int type, char *arg) {
 }
 
 void add(char *arg) {
-	if ( isint(arg) )	
+	if ( error(arg) )	
 		con.acc += atoi(arg);
-	else {
-		if ( strstr(empty, arg) ) return;	
-		fprintf(stderr, "[+]: Type error in line %d: expected number but passed `%s`\n", con.line, arg);
-		exit(0);
-	}
 }
 
 void subt(char *arg) {
-	if ( isint(arg) )	
+	if ( error(arg) )	
 		con.acc -= atoi(arg);
-	else {
-		if ( strstr(empty, arg) ) return;	
-		fprintf(stderr, "[-]: Type error in line %d: expected number but passed `%s`\n", con.line, arg);
-		exit(0);
-	}
 }
 
 void mult(char *arg) {
-	if ( isint(arg) )	
+	if ( error(arg) )	
 		con.acc *= atoi(arg);
-	else {
-		if ( strstr(empty, arg) ) return;	
-		fprintf(stderr, "[*]: Type error in line %d: expected number but passed `%s`\n", con.line, arg);
-		exit(0);
-	}
 }
 
 void cdiv(char *arg) {
-	if ( isint(arg) )	
+	if ( error(arg) )	
 		con.acc /= atoi(arg);
-	else {
-		if ( strstr(empty, arg) ) return;	
-		fprintf(stderr, "[/]: Type error in line %d: expected number but passed `%s`\n", con.line, arg);
-		exit(0);
-	}
 }
 
 void assign(char *arg) {
-	if ( isint(arg) )
+	if ( error(arg) )	
 		con.acc = atoi(arg);
-	else {
-		if ( strstr(empty, arg) ) return;	
-		fprintf(stderr, "[:]: Type error in line %d: expected number but passed `%s`\n", con.line, arg);
-		exit(0);
-	}
 }
 
 void out(char *arg) {
@@ -106,4 +89,25 @@ void out(char *arg) {
 void print(char *arg) {
 	if ( !strcmp(arg, "output") ) return;
 	printf("%s", arg);
+}
+
+void typeErrorReport(char *arg) {
+	fprintf(stderr, "[%s]: Type error in line %d: expected number but passed `%s`\n", commandList[con.mode], con.line, arg);
+}
+
+int error(char *arg) {
+	if ( con.mode >= ADD && con.mode <= DIV || con.mode == ASSIGN ) {
+		if ( !strcmp(arg, commandList[con.mode]) ) return 0;
+		if ( isint(arg) ) {
+			if ( atoi(arg) ) return 1;
+			else {
+				fprintf(stderr, "Warning line %d: operation with 0.\n", con.line);
+				exit(0);
+			}
+		}
+		else {
+			typeErrorReport(arg);
+			exit(0);
+		}
+	}
 }

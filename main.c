@@ -4,8 +4,8 @@
 
 /*
  * mfi (mat file interpreter)
- * The main file of the Mat interpreter
- * v0.1
+ * The main file of the mat interpreter
+ * v0.2.1
  * by Centrix 19.07.2019
  */
 

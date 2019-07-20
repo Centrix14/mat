@@ -2,9 +2,9 @@
 #define __MAT_H_INCLUDED__
 
 /*
- * Mathematical AuTomaton language
+ * Minimalistic AutomaTon language
  * This file is attached to mat.c
- * v0.1
+ * v0.2.1
  * by Centrix 19.07.2019
  */
 
@@ -36,5 +36,6 @@ void assign(char *arg);
 void print(char *arg);
 
 int isint(char *tok);
+int error(char *arg);
 
 #endif
