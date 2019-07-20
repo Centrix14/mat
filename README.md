@@ -1,4 +1,4 @@
-# mat - Mathematical automaton language
+# mat - Minimalistic AutomaTon language
 ## Purpose of creating language
 Undoubtedly, there are already a lot of programming languages in our world, but mat is not intended for developing programs, it is a research language that i created it for the purpose of research of automaton programming.
 

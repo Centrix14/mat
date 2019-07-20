@@ -31,6 +31,10 @@ To execute programs on a mat whose code is in the some.mat file, you can use mfi
   + `:` -- This state is used to initialize the accumulator, initially there is 0, but using this state you can change 0 to another number. In general, if you want to change the value to, say, 5, you can simply use the `+5` or `:5` construct. However, i recommend that the second option be used for such purposes.
   + `r` -- This state is used to display the battery value on the screen.
 
+  **Important note. Commands are executed in the order in which they are written, hence the operations `+`, `-`, `*`, `/`, have not the same priority as in mathematics.**
+
+  For this reason, the construction `:2+2*2r` will display the value 8, because the commands will be executed in the sequence in which they are written.
+
 **Example** 
 ```c
 :100/2*50+5-2r
