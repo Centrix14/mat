@@ -8,7 +8,7 @@
 /*
  * Mathematical AuTomaton language
  * This file contains the Mat interpreter
- * v0.1
+ * v0.1.1
  * by Centrix 19.07.2019
  */
 
@@ -16,6 +16,7 @@ context con = {OFF, MODE_EMPTY, 0, 0, 1};
 char *commandList[] = {"+", "-", "*", "/", "r", ":", "output"};
 int commandCount = 7;
 void (*funcList[]) (char *) = {add, subt, mult, cdiv, out, assign, print};
+char *empty = "+-*/: \n";
 
 int findseq(char *str, char *fndlist[], int range) {
 	for (int i = 0; i < range; i++) {
@@ -51,7 +52,7 @@ void add(char *arg) {
 	if ( isint(arg) )	
 		con.acc += atoi(arg);
 	else {
-		if ( !strcmp(arg, "+") ) return;	
+		if ( strstr(empty, arg) ) return;	
 		fprintf(stderr, "[+]: Type error in line %d: expected number but passed `%s`\n", con.line, arg);
 		exit(0);
 	}
@@ -61,7 +62,7 @@ void subt(char *arg) {
 	if ( isint(arg) )	
 		con.acc -= atoi(arg);
 	else {
-		if ( !strcmp(arg, "-") ) return;	
+		if ( strstr(empty, arg) ) return;	
 		fprintf(stderr, "[-]: Type error in line %d: expected number but passed `%s`\n", con.line, arg);
 		exit(0);
 	}
@@ -71,7 +72,7 @@ void mult(char *arg) {
 	if ( isint(arg) )	
 		con.acc *= atoi(arg);
 	else {
-		if ( !strcmp(arg, "*") ) return;	
+		if ( strstr(empty, arg) ) return;	
 		fprintf(stderr, "[*]: Type error in line %d: expected number but passed `%s`\n", con.line, arg);
 		exit(0);
 	}
@@ -81,7 +82,7 @@ void cdiv(char *arg) {
 	if ( isint(arg) )	
 		con.acc /= atoi(arg);
 	else {
-		if ( !strcmp(arg, "/") ) return;	
+		if ( strstr(empty, arg) ) return;	
 		fprintf(stderr, "[/]: Type error in line %d: expected number but passed `%s`\n", con.line, arg);
 		exit(0);
 	}
@@ -91,7 +92,7 @@ void assign(char *arg) {
 	if ( isint(arg) )
 		con.acc = atoi(arg);
 	else {
-		if ( !strcmp(arg, ":") ) return;	
+		if ( strstr(empty, arg) ) return;	
 		fprintf(stderr, "[:]: Type error in line %d: expected number but passed `%s`\n", con.line, arg);
 		exit(0);
 	}

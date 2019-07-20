@@ -3,7 +3,7 @@
 #include "mat.h"
 
 /*
- * main.c
+ * mfi (mat file interpreter)
  * The main file of the Mat interpreter
  * v0.1
  * by Centrix 19.07.2019
