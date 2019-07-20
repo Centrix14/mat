@@ -24,7 +24,7 @@ context con = {OFF, MODE_EMPTY, 0, 0, 1};
 char *commandList[] = {"+", "-", "*", "/", "r", ":", "output"};
 int commandCount = 7;
 void (*funcList[]) (char *) = {add, subt, mult, cdiv, out, assign, print};
-char *empty = "+-*/: \n";
+char *empty = " \n";
 
 int findseq(char *str, char *fndlist[], int range) {
 	for (int i = 0; i < range; i++) {
@@ -97,7 +97,7 @@ void typeErrorReport(char *arg) {
 
 int error(char *arg) {
 	if ( con.mode >= ADD && con.mode <= DIV || con.mode == ASSIGN ) {
-		if ( !strcmp(arg, commandList[con.mode]) ) return 0;
+		if ( !strcmp(arg, commandList[con.mode]) || strstr(empty, arg) ) return 0;
 		if ( isint(arg) ) {
 			if ( atoi(arg) ) return 1;
 			else {
