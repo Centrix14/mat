@@ -34,5 +34,7 @@ int main(int argc, char *argv[]) {
 		}
 		fgets(line, 256, source);
 	}
+
+	fclose(source);
 	return 0;
 }

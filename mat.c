@@ -8,7 +8,7 @@
 /*
  * Minimalistic AutomaTon language
  * This file contains the Mat interpreter
- * v0.2.3
+ * v0.2.2
  * by Centrix 20.07.2019
  */
 
