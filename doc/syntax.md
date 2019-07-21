@@ -60,4 +60,16 @@ Explanations. In this example, we first translate the machine into the state of 
 
 Note. As you may have noticed, the phrase was printed on a new line. This is because after switching to print mode on the screen, we moved to a new line, and it was also printed. If you want to avoid this, you can use the following construct: `output_some text`, where `_` is a null character. Also notice that the `output` and `some` in the given example these are two different lexemes.
 
+## Other means
+  + Comments. As in normal programming languages, comments in mat do not affect the result and execution of the program. There is only one type of comment in mat -- multiline. The text of the comment is framed by `~` (tilde) on both sides. For example. 
+
+  ```c
+  output_A first line
+  ~ A second line ~
+
+  ```
+  The message `A second line` will not be displayed, as it is the text of the comment.
+
+  **But we draw your attention to the first syntax rule mat:** ***Characters of the same type are not a single token, must be separated***. **Therefore, the expression `~:90~` is not a comment, since `~` and`: ` are characters and will be read as one token `~:`.**
+
 # At the moment this is all for now, do not forget that this programming language is still in development!
