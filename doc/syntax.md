@@ -25,7 +25,7 @@ Some text
 And also change the number stored in the accumulator (the accumulator stores the results of all mathematical operations). Initially there was 0, but now the accumulator stores the sum of the numbers 5, 6, 7, 8 and 9, that is 35. You can use the `r` state to verify this.   
 To execute programs on a mat whose code is in the some.mat file, you can use mfi (mat file interpreter), which is called with the `mat` command. Then it turns out the command `mat some.mat`
 
-## States supported mfi interpreter v0.2.2 
+## States supported mfi interpreter v0.2.x 
 ### Mathematical States
   + `+`, `-`, `*`, `/` -- These States correspond to their mathematical analog, with one difference, all operations are performed on the integer from the accumulator and the transmitted number. This means that the record +2 is the same as acc = acc + 2, where c is the number stored in the accumulator.
   + `:` -- This state is used to initialize the accumulator, initially there is 0, but using this state you can change 0 to another number. In general, if you want to change the value to, say, 5, you can simply use the `+5` or `:5` construct. However, i recommend that the second option be used for such purposes.
