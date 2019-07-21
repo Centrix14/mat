@@ -8,7 +8,7 @@
 /*
  * Minimalistic AutomaTon language
  * This file contains the Mat interpreter
- * v0.2.2
+ * v0.2.3
  * by Centrix 20.07.2019
  */
 
@@ -21,10 +21,11 @@ enum states {
 };
 
 context con = {OFF, MODE_EMPTY, 0, 0, 1};
-char *commandList[] = {"+", "-", "*", "/", "r", ":", "output"};
-int commandCount = 7;
-void (*funcList[]) (char *) = {add, subt, mult, cdiv, out, assign, print};
-char *empty = " \n";
+char *commandList[] = {"+", "-", "*", "/", "r", ":", "output", "~"};
+int commandCount = 8;
+void (*funcList[]) (char *) = {add, subt, mult, cdiv, out, assign, print, comment};
+char *empty = " \n_";
+int com = 0;
 
 int findseq(char *str, char *fndlist[], int range) {
 	for (int i = 0; i < range; i++) {
@@ -80,13 +81,20 @@ void assign(char *arg) {
 }
 
 void out(char *arg) {
+	if ( com ) return;
 	printf("%d\n", con.acc);
 	con.mode = MODE_EMPTY;
 }
 
 void print(char *arg) {
+	if ( com ) return;	
 	if ( !strcmp(arg, "output") || !strcmp(arg, "_") ) return;
 	printf("%s", arg);
+}
+
+void comment(char *arg) {
+	if ( !strcmp(arg, "~") && com == 0 ) com = 1;
+	else if ( !strcmp(arg, "~") && com == 1 ) com = 0;
 }
 
 void typeErrorReport(char *arg) {
@@ -94,6 +102,8 @@ void typeErrorReport(char *arg) {
 }
 
 int error(char *arg) {
+	if ( com ) return 0;
+
 	if ( con.mode >= ADD && con.mode <= DIV || con.mode == ASSIGN ) {
 		if ( !strcmp(arg, commandList[con.mode]) || strstr(empty, arg) ) return 0;
 		if ( isint(arg) ) {
