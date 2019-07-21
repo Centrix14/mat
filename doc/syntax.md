@@ -70,6 +70,6 @@ Note. As you may have noticed, the phrase was printed on a new line. This is bec
   ```
   The message `A second line` will not be displayed, as it is the text of the comment.
 
-  **But we draw your attention to the first syntax rule mat:** ***Characters of the same type are not a single token, must be separated***. **Therefore, the expression `~:90~` is not a comment, since `~` and`: ` are characters and will be read as one token `~:`.**
+  **But we draw your attention to the first syntax rule mat:** ***Characters of the same type are not a single token, must be separated***. **Therefore, the expression `~:90~` is not a comment, since `~` and`:` are characters and will be read as one token `~:`.**
 
 # At the moment this is all for now, do not forget that this programming language is still in development!
