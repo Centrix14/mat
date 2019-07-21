@@ -8,7 +8,7 @@
 /*
  * Minimalistic AutomaTon language
  * This file contains the Mat interpreter
- * v0.2.1
+ * v0.2.2
  * by Centrix 20.07.2019
  */
 
@@ -38,17 +38,15 @@ int getCommandType(char *tok) {
 }
 
 void interpret(char *tok) {
-	if ( !strcmp(tok, "\n") && con.commandOn == ON )
+	if ( !strcmp(tok, "\n") )
 			con.line++;
-	else  {
-		if ( getCommandType(tok) != ERROR ) {	
-			con.commandOn = ON;
-			con.mode = getCommandType(tok);
-		}
-		else 
-			con.commandOn = OFF;	
-		execCommand(con.mode, tok);
-   	}	
+	if ( getCommandType(tok) != ERROR ) {	
+		con.commandOn = ON;
+		con.mode = getCommandType(tok);
+	}
+	else 
+		con.commandOn = OFF;	
+	execCommand(con.mode, tok);
 }
 
 void execCommand(int type, char *arg) {
@@ -87,12 +85,12 @@ void out(char *arg) {
 }
 
 void print(char *arg) {
-	if ( !strcmp(arg, "output") ) return;
+	if ( !strcmp(arg, "output") || !strcmp(arg, "_") ) return;
 	printf("%s", arg);
 }
 
 void typeErrorReport(char *arg) {
-	fprintf(stderr, "[%s]: Type error in line %d: expected number but passed `%s`\n", commandList[con.mode], con.line, arg);
+	fprintf(stderr, "\n[%s]: Type error in line %d: expected number but passed `%s`\n", commandList[con.mode], con.line, arg);
 }
 
 int error(char *arg) {
@@ -101,7 +99,7 @@ int error(char *arg) {
 		if ( isint(arg) ) {
 			if ( atoi(arg) ) return 1;
 			else {
-				fprintf(stderr, "Warning line %d: operation with 0.\n", con.line);
+				fprintf(stderr, "\nWarning line %d: operation with 0.\n", con.line);
 				exit(0);
 			}
 		}

@@ -4,7 +4,7 @@
 /*
  * Minimalistic AutomaTon language
  * This file is attached to mat.c
- * v0.2.1
+ * v0.2.2
  * by Centrix 19.07.2019
  */
 
