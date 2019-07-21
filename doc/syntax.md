@@ -25,7 +25,7 @@ Some text
 And also change the number stored in the accumulator (the accumulator stores the results of all mathematical operations). Initially there was 0, but now the accumulator stores the sum of the numbers 5, 6, 7, 8 and 9, that is 35. You can use the `r` state to verify this.   
 To execute programs on a mat whose code is in the some.mat file, you can use mfi (mat file interpreter), which is called with the `mat` command. Then it turns out the command `mat some.mat`
 
-## States supported mfi interpreter v0.1.1 
+## States supported mfi interpreter v0.2.2 
 ### Mathematical States
   + `+`, `-`, `*`, `/` -- These States correspond to their mathematical analog, with one difference, all operations are performed on the integer from the accumulator and the transmitted number. This means that the record +2 is the same as acc = acc + 2, where c is the number stored in the accumulator.
   + `:` -- This state is used to initialize the accumulator, initially there is 0, but using this state you can change 0 to another number. In general, if you want to change the value to, say, 5, you can simply use the `+5` or `:5` construct. However, i recommend that the second option be used for such purposes.
@@ -50,4 +50,14 @@ output
 Hi! I'm a useless text being printed by another useless programming language!
 
 ```
+The result of the program.
+```c
+
+Hi! I'm a useless text being printed by another useless programming language!
+
+```
+Explanations. In this example, we first translate the machine into the state of data output to the screen, and then give the data that will be displayed on the screen.
+
+Note. As you may have noticed, the phrase was printed on a new line. This is because after switching to print mode on the screen, we moved to a new line, and it was also printed. If you want to avoid this, you can use the following construct: `output_some text`, where `_` is a null character. Also notice that the `output` and `some` in the given example these are two different lexemes.
+
 # At the moment this is all for now, do not forget that this programming language is still in development!
