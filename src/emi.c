@@ -1,6 +1,7 @@
 #include <stdio.h>
-#include "mat.h"
-#include "mattok.h" 
+#include "../include/def.h"
+#include "../include/mat.h"
+#include "../include/mattok.h" 
 
 /*
  * Embedded interpreter mat 

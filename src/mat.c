@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "mat.h"
-#include "mattok.h"
+#include "../include/def.h"
+#include "../include/mat.h"
+#include "../include/mattok.h"
 
 /*
  * Minimalistic AutomaTon language
@@ -12,18 +13,6 @@
  * by Centrix 22.07.2019
  */
 
-enum states {
-	ADD = 0,
-	SUBT,
-	MULT,
-	DIV,
-	ASSIGN = 5,
-	AND = 8,
-	OR,
-	NOT
-};
-
-context con = {OFF, MODE_EMPTY, 0, 0, 1};
 char *commandList[] = {"+", "-", "*", "/", "r", ":", "output", "~", "&", "|", "_!", "term"};
 int commandCount = 12;
 void (*funcList[]) (char *) = {add, subt, mult, cdiv, out, assign, print, comment, and, or, not, term};
@@ -174,4 +163,36 @@ int error(char *arg) {
 		if ( con.mode == findseq(arg, commandList, commandCount) ) return 0;
 		return 1;
 	}
+}
+
+int getCommandOn() {
+	return con.commandOn;
+}
+
+void setCommandOn(int newState) {
+	con.commandOn = newState;
+}
+
+int getMode() {
+	return con.mode;
+}
+
+void setMode(int newState) {
+	con.mode = newState;
+}
+
+int getAcc() {
+	return con.acc;
+}
+
+void setAcc(int newValue) {
+	con.acc = newValue;
+}
+
+int getLine() {
+	return con.line;
+}
+
+void setLine(int newValue) {
+	con.line = newValue;
 }

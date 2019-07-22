@@ -8,20 +8,6 @@
  * by Centrix 22.07.2019
  */
 
-#define ERROR -1
-#define ON 1
-#define OFF -1
-
-#define MODE_EMPTY -1
-
-typedef struct {
-	int commandOn;
-	int mode;
-	int fpos;
-	int acc;
-	int line;
-} context;
-
 int findseq(char *str, char *fndlist[], int range);
 int getCommandType(char *tok);
 void interpret(char *tok);

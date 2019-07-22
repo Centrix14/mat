@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "mattok.h"
-#include "mat.h"
+#include "../include/mattok.h"
+#include "../include/mat.h"
 
 /*
  * mfi (mat file interpreter)

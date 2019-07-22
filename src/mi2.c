@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
-#include "mattok.h"
-#include "mat.h"
+#include "../include/mattok.h"
+#include "../include/mat.h"
 
 /*
  * mi2.c Interactive Mat interpreter 

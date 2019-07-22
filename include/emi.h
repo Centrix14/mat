@@ -10,5 +10,13 @@
 
 void matrun(char *prog);
 void matfrun(char *fname);
+int getCommandOn();
+void setCommandOn(int newState);
+int getMode();
+void setMode(int newState);
+int getAcc();
+void setAcc(int newValue);
+int getLine();
+void setLine(int newValue);
 
 #endif
