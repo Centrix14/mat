@@ -4,8 +4,8 @@
 /*
  * Embedded interpreter mat
  * This file is attached to emi.c
- * v0.1
- * by Centrix 21.07.2019
+ * v0.2
+ * by Centrix 22.07.2019
  */
 
 void matrun(char *prog);

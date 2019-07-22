@@ -6,8 +6,8 @@
 /*
  * Embedded interpreter mat 
  * It can be used to interpret programs on mat in other programs.
- * v0.1
- * by Centrix 21.07.2019
+ * v0.2
+ * by Centrix 22.07.2019
  */
 
 void matrun(char *prog) {
