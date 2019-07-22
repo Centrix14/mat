@@ -4,8 +4,8 @@
 /*
  * Minimalistic AutomaTon language
  * This file is attached to mat.c
- * v0.2.3
- * by Centrix 19.07.2019
+ * v0.2.4
+ * by Centrix 22.07.2019
  */
 
 #define ERROR -1
@@ -35,6 +35,10 @@ void out(char *arg);
 void assign(char *arg);
 void print(char *arg);
 void comment(char *arg);
+void and(char *arg);
+void or(char *arg);
+void not(char *arg);
+void term(char *arg);
 
 int isint(char *tok);
 int error(char *arg);
