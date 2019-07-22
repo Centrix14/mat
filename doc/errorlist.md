@@ -17,6 +17,7 @@ This document provides a list of errors that you can get when working with mfi o
 
 ## Warnings
   1. Operation with 0. This warning is given when a mathematical operation with 0 is performed.
+  **Comment**. Since version 0.2.4, 2 zero operations are allowed: `&` -- logical And, `:` -- assigning a value to the battery. Therefore, when using constructs such as `:0` and `&0`, no warning will be issued.
   **Example**
   As an example, the following failed program
   ```c
