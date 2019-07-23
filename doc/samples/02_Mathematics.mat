@@ -1,0 +1,18 @@
+~
+Sample 2. Mathematics
+
+In this lesson, we will look at the application of mathematics in mat 
+The following calculation modes are supported in mat (+, -, *, /)
+~
+
+~ To begin, consider the calculation of the expression 2+(2*2) ~
+:2 ~ Initialize accumulator 2 ~
+*2 ~ Multiply the value of the accumulator 2 ~
++2r ~ Add 2 and display the value of the accumulator. ~
+
+~ And also calculate the value of the expression (2+2)*2 ~
+:2 ~ Initialize accumulator 2 ~
++2 ~ Add 2  ~
+*2r ~ Multiply 2 and display the value of the accumulator. ~
+
+~ Therefore, the above expressions have different meanings 6 != 8 ~

@@ -1,0 +1,11 @@
+~ 
+Sample 1. Hello world
+
+In this example, we will analyze the program Hello world in mat. 
+~
+~ :5r ~
+
+
+output_Hello world! ~ In order not to start with a new line, and not to print a space, 
+use a special character-a dummy '_'. ~
+~ Do not forget that at the end of each file should be an empty line or comment! ~

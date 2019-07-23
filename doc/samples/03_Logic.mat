@@ -1,0 +1,19 @@
+~
+Sample 2. Logic
+
+In this lesson, we'll look at using basic logical operations in mat
+~
+
+~ For a start, we initialize the value of the accumulator ~
+:5
+
+~ Then perform the operation And with the value of the accumulator and the number 6. ~
+&6
+
+_! ~ Invert the value of the accumulator ~
+
+~ Then perform the operation OR the number of the accumulator and 7. ~
+|7
+
+~ Now display the result of the calculations on the screen. ~
+r

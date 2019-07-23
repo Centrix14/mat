@@ -1,0 +1,11 @@
+~
+Sample 4. Terminal
+
+This example uses the capabilities of an external terminal.
+The following syntax is used when accessing the terminal: term <command>$
+Please note that the $ sign is mandatory and represents that the command is over.
+~
+
+term ~ Go to the mode of access to the terminal ~
+echo Hi from terminal! $ ~ Output the value using the terminal ~
+
