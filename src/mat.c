@@ -13,9 +13,9 @@
  * by Centrix 23.07.2019
  */
 
-char *commandList[] = {"+", "-", "*", "/", "r", ":", "output", "~", "&", "|", "_!", "term"};
-int commandCount = 12;
-void (*funcList[]) (char *) = {add, subt, mult, cdiv, out, assign, print, comment, and, or, not, term};
+char *commandList[] = {"+", "-", "*", "/", "r", ":", "output", "&", "|", "_!", "term"};
+int commandCount = 11;
+void (*funcList[]) (char *) = {add, subt, mult, cdiv, out, assign, print, and, or, not, term};
 char *empty = " \n_";
 int com = 0;
 
@@ -33,7 +33,11 @@ int getCommandType(char *tok) {
 void interpret(char *tok) {
 	if ( !strcmp(tok, "\n") )
 			con.line++;
-	if ( getCommandType(tok) != ERROR ) {	
+	if ( !strcmp(tok, "~") ) {
+		comment(tok);
+		return;
+	}
+	if ( getCommandType(tok) != ERROR && !com ) {	
 		con.commandOn = ON;
 		con.mode = getCommandType(tok);
 	}
@@ -73,13 +77,14 @@ void assign(char *arg) {
 }
 
 void out(char *arg) {
-	if ( error(arg) ) return;
-	printf("%d\n", con.acc);
-	con.mode = MODE_EMPTY;
+	if ( error(arg) ) { 
+		printf("%d\n", con.acc);
+		con.mode = MODE_EMPTY;
+	}
 }
 
 void print(char *arg) {
-	if ( !strcmp(arg, "output") || !strcmp(arg, "_") ) return;
+	if ( (!strcmp(arg, "output") || !strcmp(arg, "_")) || com ) return;
 	printf("%s", arg);
 }
 
@@ -127,12 +132,11 @@ void cat(char *dst, char *src) {
 void term(char *arg) {
 	static char command[256] = "\0";
 
-	if ( !strcmp(arg, "term") ) return;
+	if ( !strcmp(arg, "term") || com ) return;
 	if ( !strcmp(arg, "$") ) {
 		commandRun(command);
 		return;
 	}
-
 	cat(command, arg);
 }
  
@@ -163,10 +167,7 @@ int error(char *arg) {
 			exit(0);
 		}
 	}
-	else {
-		if ( con.mode == findseq(arg, commandList, commandCount) ) return 0;
-		return 1;
-	}
+	return 1;
 }
 
 int getCommandOn() {
