@@ -15,18 +15,27 @@ This document provides a list of errors that you can get when working with mfi o
 
   From this message we can conclude that the error occurred in the initialization state `:`, in 1 line. Also, it is further explained that the expected number, but the expression was passed in quotation marks.
 
+  2. Automaton error. This error can occur for many reasons. For example, when you are in the `term` state and the interpreter cannot access an external terminal.  
+  General view of this error:
+
+> Automaton error: [reason]
+
+  Where the expression [reason] is the reason for the error. For example, if the error is that you cannot access the external terminal, the text [reason] will be as follows:
+
+> the terminal is unavailable, the transition to the term state is not made.
+
 ## Warnings
   1. Operation with 0. This warning is given when a mathematical operation with 0 is performed.
   **Comment**. Since version 0.2.4, 2 zero operations are allowed: `&` -- logical And, `:` -- assigning a value to the battery. Therefore, when using constructs such as `:0` and `&0`, no warning will be issued.
   **Example**
   As an example, the following failed program
   ```c
-  :0
+  +0
 
   ```
   When the program starts, mfi will display the following message:
 > Warning line 1: operation with 0.	
 
-  From this message, you can conclude that a zero operation is performed on the line.
+  From this message, you can conclude that a zero operation is performed on the line 1.
   **It is worth noting that despite the warning status, after issuing this message, mfi and mi2 will stop working!**
 

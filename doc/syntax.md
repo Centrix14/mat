@@ -60,6 +60,31 @@ Explanations. In this example, we first translate the machine into the state of 
 
 Note. As you may have noticed, the phrase was printed on a new line. This is because after switching to print mode on the screen, we moved to a new line, and it was also printed. If you want to avoid this, you can use the following construct: `output_some text`, where `_` is a null character. Also notice that the `output` and `some` in the given example these are two different lexemes.
 
+  + `term` -- This state can be used to access an external terminal. In the term state, the following syntax is used to enter commands into the terminal:
+
+```c
+term
+<command>$
+
+```
+  Note. The `$` symbol indicates that the command is over and can be executed.
+
+  **Example**
+```c
+term echo Hi from terminal! $
+
+```
+Explanation. In this example, first the transition to the term state is made, then the command that will be passed to the terminal is written, and when the command is over, we put the symbol `$`, thus indicating that the room is over and can be transferred to the terminal.
+
+The result of the program:
+
+```sh
+Hi from terminal!
+
+```
+
+Note. In the situation when it is impossible to access the terminal, the machine generates an error (see details [here](errorlist.md)).
+
 ## Other means
   + Comments. As in normal programming languages, comments in mat do not affect the result and execution of the program. There is only one type of comment in mat -- multiline. The text of the comment is framed by `~` (tilde) on both sides. For example. 
 

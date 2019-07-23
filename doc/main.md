@@ -16,9 +16,12 @@ It includes:
 
 ## How to compile it?
 Use the make utility with the following syntax:
+  + make init -- on first compile
   + make mat -- to compile the file interpreter.
   + make mi2 -- to compile an interactive interpreter. 
   + make emi -- to compile an embedded interpreter. 
+  + make clean -- to remove compilation side files
+  + make del -- to delete the source files. The compiled utilities and documentation will remain.
 
 ## How to use it? 
 Click the following links to get the information you need.

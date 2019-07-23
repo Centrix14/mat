@@ -7,8 +7,8 @@ emi -- is a special implementation of the mat interpreter designed for embedding
 To compile the library, use the make utility as mentioned [here](main.md).
 
 ## Functions available in emi.
-  + matrun()
-    Prototype: void matrun(char *prog);
+  + matrun()  
+    Prototype: `void matrun(char *prog);`  
 	Appointment -- Interprets a program written in the zero format of a terminated string. The program is passed through the prog argument.
 
 **Example**
@@ -32,8 +32,8 @@ Now compile our program using gcc (This is just an example in your case flags ca
 gcc -L. -I. -o testemi testemi.c libemi.a
 ```
 
-  + matfrun()
-    Prototype: void matfrun(char *fname);
+  + matfrun()  
+    Prototype: `void matfrun(char *fname);`  
 	Appointment -- Interpretation of the program file with the name fname.
 
 **Example**
@@ -75,5 +75,9 @@ A new line
 Hi from C!
 
 ```
+
+  + getCommandOn, setCommandOn  
+    Prototypes: `int getCommandOn();` `void setCommandOn(int newState);`  
+	Appointment -- Changing / read the `commandOn` parameter, which in the ON state indicates that the word being read is a reserved mat keyword.
 
 # If you have any problems then repeat the procedures you have done again. If you have another problem, you can contact me by e-mail from [here](main.md).
