@@ -5,8 +5,8 @@
 /*
  * mfi (mat file interpreter)
  * The main file of the mat interpreter
- * v0.2.4
- * by Centrix 22.07.2019
+ * v0.2.5
+ * by Centrix 23.07.2019
  */
 
 int main(int argc, char *argv[]) {
@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
 
 	source = fopen(argv[1], "r");
 	if ( source == NULL ) {
-		fprintf(stderr, "file error\n");
+		fprintf(stderr, "mat: Cannot open the file `%s`\n", argv[1]);
 		return -1;
 	}
 

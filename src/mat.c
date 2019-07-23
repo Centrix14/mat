@@ -9,8 +9,8 @@
 /*
  * Minimalistic AutomaTon language
  * This file contains the Mat interpreter
- * v0.2.4
- * by Centrix 22.07.2019
+ * v0.2.5
+ * by Centrix 23.07.2019
  */
 
 char *commandList[] = {"+", "-", "*", "/", "r", ":", "output", "~", "&", "|", "_!", "term"};
@@ -113,6 +113,10 @@ void strclean(char *str) {
 void commandRun(char *command) {
 	if ( system(NULL) )
 		system(command);
+	else {
+		fprintf(stderr, "Automaton error: the terminal is unavailable, the transition to the term state is not made.");
+		exit(0);
+	}
 	strclean(command);
 }
 

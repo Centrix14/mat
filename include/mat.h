@@ -4,8 +4,8 @@
 /*
  * Minimalistic AutomaTon language
  * This file is attached to mat.c
- * v0.2.4
- * by Centrix 22.07.2019
+ * v0.2.5
+ * by Centrix 23.07.2019
  */
 
 int findseq(char *str, char *fndlist[], int range);
