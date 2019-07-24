@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <math.h>
 #include "../include/def.h"
 #include "../include/mat.h"
 #include "../include/mattok.h"
@@ -9,14 +10,16 @@
 /*
  * Minimalistic AutomaTon language
  * This file contains the Mat interpreter
- * v0.2.5
- * by Centrix 23.07.2019
+ * v0.2.6
+ * by Centrix 24.07.2019
  */
 
-char *commandList[] = {"+", "-", "*", "/", "r", ":", "output", "&", "|", "_!", "term"};
-int commandCount = 11;
-void (*funcList[]) (char *) = {add, subt, mult, cdiv, out, assign, print, and, or, not, term};
+char *commandList[] = {"+", "-", "*", "/", ":", "&", "|", "_!", "neg", "abs", "sqrt", "^", "output", "term", "r"};
+int commandCount = 15;
+void (*funcList[]) (char *) = {add, subt, mult, cdiv, assign, and, or, not, neg, module, root, power, print, term, out};
 char *empty = " \n_";
+char *single[] = {"r", "_!", "neg", "abs", "sqrt"};
+int singleCount = 5; 
 int com = 0;
 
 int findseq(char *str, char *fndlist[], int range) {
@@ -139,13 +142,47 @@ void term(char *arg) {
 	}
 	cat(command, arg);
 }
+
+void neg(char *arg) {
+	if ( error(arg) )
+		con.acc = -con.acc;	
+	
+	con.mode = MODE_EMPTY;
+}
+
+void module(char *arg) {
+	if ( error(arg) )
+		con.acc = abs(con.acc);
+	con.mode = MODE_EMPTY;
+}
+
+void root(char *arg) {
+	if ( error(arg) )
+		con.acc = sqrt(con.acc);
+	con.mode = MODE_EMPTY;
+}
+
+int powi(int base, int exp) {
+	int out = 1;
+	
+	while ( exp ) {
+		out = base * out;
+		exp--;
+	}
+	return out;
+}
+
+void power(char *arg) {
+	if ( error(arg) )
+		con.acc = powi(con.acc, atoi(arg));	
+}
  
 void typeErrorReport(char *arg) {
 	fprintf(stderr, "\n[%s]: Type error in line %d: expected number but passed `%s`\n", commandList[con.mode], con.line, arg);
 }
 
 int isMathorLog() {
-	if ( (con.mode >= ADD && con.mode <= DIV) || (con.mode == ASSIGN) || (con.mode >= AND && con.mode <= NOT) )
+	if ( con.mode >= 0 && con.mode <= 11 )
 		return 1;
 	return 0;
 }
@@ -154,6 +191,7 @@ int error(char *arg) {
 	if ( com ) return 0;
 
 	if ( isMathorLog() ) {
+		if ( findseq(arg, single, singleCount) != ERROR ) return 1;	
 		if ( !strcmp(arg, commandList[con.mode]) || strstr(empty, arg) ) return 0;
 		if ( isint(arg) ) {
 			if ( !atoi(arg) && con.mode != ASSIGN && con.mode != AND ) {
@@ -163,10 +201,14 @@ int error(char *arg) {
 			return 1;
 		}
 		else {
+			if ( findseq(arg, single, singleCount) != ERROR ) return 1;	
 			typeErrorReport(arg);
 			exit(0);
 		}
 	}
+	else 
+		if ( !strcmp(commandList[con.mode], arg) && findseq(arg, single, singleCount) == ERROR ) return 0;
+	
 	return 1;
 }
 

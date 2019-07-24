@@ -12,10 +12,14 @@ enum states {
 	SUBT,
 	MULT,
 	DIV,
-	ASSIGN = 5,
-	AND = 8,
+	ASSIGN,
+	AND,
 	OR,
-	NOT
+	NOT,
+	NEG,
+	ABS,
+	ROOT,
+	POW
 };
 
 typedef struct {

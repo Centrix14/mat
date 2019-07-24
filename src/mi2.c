@@ -6,8 +6,8 @@
 /*
  * mi2.c Interactive Mat interpreter 
  * The main file of the interactive Mat interpreter 
- * v0.2.5
- * by Centrix 23.07.2019
+ * v0.2.6
+ * by Centrix 24.07.2019
  */
 
 int main(int argc, char *argv[]) {
