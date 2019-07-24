@@ -1,10 +1,10 @@
 # mat - Minimalistic AutomaTon language
 
-## new version 0.2.4
+## new version 0.2.6
 With the advent of the new version, added to mat:
-  + Logical operations AND `&` OR `|`, NOT `_!`.
-  + Mode of interaction with the external terminal `term`.
-  + Changed behavior warning about operations with zero.
+  + Fixed a very large bug related to comments.
+  + Fixed a bug when working in terminal mode.
+  + Added new mathematical features: neg, abs, sqrt, ^
 
 ## Purpose of creating language
 Undoubtedly, there are already a lot of programming languages in our world, but mat is not intended for developing programs, it is a research language that i created it for the purpose of research of automaton programming.

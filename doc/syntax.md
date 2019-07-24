@@ -1,8 +1,7 @@
 # mat syntax documentation
 ## Fundamentals
-**There are 2 syntax rules in mat**
+**There is 1 syntax rule in mat**
   1. If consecutive characters are of the same type (numbers, letters, signs), they are all perceived as one word explanation: '53' will be perceived as one number, but if you want to 5 and 3 were considered separate , then divide them, such as a letter or a sign or something else.
-  2. The second rule applies only to the mat file interpreter. ***All files must end with an empty line.*** For example, if your program has 3 lines of code, then add 4 blank lines at the end.
   
 **States**  
 
@@ -27,11 +26,11 @@ To execute programs on a mat whose code is in the some.mat file, you can use mfi
 
 ## States supported mfi interpreter v0.2.x 
 ### Mathematical States
-  + `+`, `-`, `*`, `/` -- These States correspond to their mathematical analog, with one difference, all operations are performed on the integer from the accumulator and the transmitted number. This means that the record +2 is the same as acc = acc + 2, where c is the number stored in the accumulator.
+  + `+`, `-`, `*`, `/` `^`, `abs`, `neg`, `sqrt` -- These States correspond to their mathematical analog, with one difference, all operations are performed on the integer from the accumulator and the transmitted number. This means that the record +2 is the same as acc = acc + 2, where acc is the number stored in the accumulator.
   + `:` -- This state is used to initialize the accumulator, initially there is 0, but using this state you can change 0 to another number. In general, if you want to change the value to, say, 5, you can simply use the `+5` or `:5` construct. However, i recommend that the second option be used for such purposes.
   + `r` -- This state is used to display the battery value on the screen.
 
-  **Important note. Commands are executed in the order in which they are written, hence the operations `+`, `-`, `*`, `/`, have not the same priority as in mathematics.**
+  **Important note. Commands are executed in the order in which they are written**
 
   For this reason, the construction `:2+2*2r` will display the value 8, because the commands will be executed in the sequence in which they are written.
 
