@@ -2,7 +2,7 @@
 Sample 2. Mathematics
 
 In this lesson, we will look at the application of mathematics in mat 
-The following calculation modes are supported in mat (+, -, *, /)
+The following calculation modes are supported in mat (+, -, *, /, :, neg, abs, sqrt, ^)
 ~
 
 ~ To begin, consider the calculation of the expression 2+(2*2) ~
@@ -16,3 +16,12 @@ The following calculation modes are supported in mat (+, -, *, /)
 *2r ~ Multiply 2 and display the value of the accumulator. ~
 
 ~ Therefore, the above expressions have different meanings 6 != 8 ~
+
+~ Now calculate the following expression: (|-5| + 2)^2 (49) ~
+:5 neg abs ~ Change the battery value, change the value to the opposite and calculate the module of this value. ~
++2 ~ Add 2 ~
+^2r ~ Squared, and display the value on the screen  ~
+
+~ Finally, we display the value of this expression: sqrt(|-89|-15+6*2/4^4) (1600) ~
+:89 neg abs -15+6*2/4^4 sqrt r
+
