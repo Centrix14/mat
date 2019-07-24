@@ -13,7 +13,7 @@
 int main(int argc, char *argv[]) {
 	char line[256], *tok;
 
-	printf("-- IMI v0.2.3 (Interactive Mat interpreter) by Centrix 22.07.2019 --\n\n");
+	printf("-- IMI v0.2.6 (Interactive Mat interpreter) by Centrix 24.07.2019 --\n\n");
 	while ( 1 ) {
 		tok = gettoken(line, 1);
 
