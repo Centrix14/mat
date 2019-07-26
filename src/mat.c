@@ -10,16 +10,18 @@
 /*
  * Minimalistic AutomaTon language
  * This file contains the Mat interpreter
- * v0.2.6
- * by Centrix 24.07.2019
+ * v0.3.1
+ * by Centrix 26.07.2019
  */
 
-char *commandList[] = {"+", "-", "*", "/", ":", "&", "|", "_!", "neg", "abs", "sqrt", "^", "output", "term", "r"};
-int commandCount = 15;
-void (*funcList[]) (char *) = {add, subt, mult, cdiv, assign, and, or, not, neg, module, root, power, print, term, out};
+char *commandList[] = {"+", "-", "*", "/", ":", "&", "|", "_!", "neg", "abs", "sqrt", "^", "output", "term", "r",\
+		">", "<", ">=", "<=", "=", "!=", "cmpr", "TRUE", "FALSE", "END"};
+int commandCount = 25;
+void (*funcList[]) (char *) = {add, subt, mult, cdiv, assign, and, or, not, neg, module, root, power, print, term,\
+		out, bigger, smaller, biggerOrEq, smallerOrEq, eq, notEq, cmpr, isTrue, isFalse, end};
 char *empty = " \n_";
-char *single[] = {"r", "_!", "neg", "abs", "sqrt"};
-int singleCount = 5; 
+char *single[] = {"r", "_!", "neg", "abs", "sqrt", "cmpr", "TRUE", "FALSE"};
+int singleCount = 8; 
 int com = 0;
 
 int findseq(char *str, char *fndlist[], int range) {
@@ -88,7 +90,8 @@ void out(char *arg) {
 
 void print(char *arg) {
 	if ( (!strcmp(arg, "output") || !strcmp(arg, "_")) || com ) return;
-	printf("%s", arg);
+	if ( con.enableExec )
+		printf("%s", arg);
 }
 
 void comment(char *arg) {
@@ -176,6 +179,63 @@ void power(char *arg) {
 	if ( error(arg) )
 		con.acc = powi(con.acc, atoi(arg));	
 }
+
+void bigger(char *arg) {
+	if ( error(arg) )
+		con.cmpResult = con.acc > atoi(arg);	
+}
+
+void smaller(char *arg) {
+	if ( error(arg) ) 
+		con.cmpResult = con.acc < atoi(arg);
+}
+
+void eq(char *arg) {
+	if ( error(arg) ) 
+		con.cmpResult = con.acc == atoi(arg);
+}
+
+void notEq(char *arg) {
+	if ( error(arg) ) 
+		con.cmpResult = con.acc != atoi(arg);
+}
+
+void biggerOrEq(char *arg) {
+	if ( error(arg) ) 
+		con.cmpResult = con.acc >= atoi(arg);
+}
+
+void smallerOrEq(char *arg) {
+	if ( error(arg) ) 
+		con.cmpResult = con.acc <= atoi(arg);
+}
+
+void cmpr(char *arg) {
+	if ( error(arg) ) 
+		printf("%d", con.cmpResult);
+	con.mode = MODE_EMPTY;
+}
+
+void isTrue(char *arg) {
+	if ( con.cmpResult )
+		con.enableExec = 1;
+	else
+		con.enableExec = 0;	
+	con.mode = MODE_EMPTY;
+}
+
+void isFalse(char *arg) {
+	if ( !con.cmpResult )
+		con.enableExec = 1;
+	else
+		con.enableExec = 0;	
+	con.mode = MODE_EMPTY;
+}
+
+void end(char *arg) {
+	con.enableExec = 1;
+	con.mode = MODE_EMPTY;
+}
  
 void typeErrorReport(char *arg) {
 	fprintf(stderr, "\n[%s]: Type error in line %d: expected number but passed `%s`\n", commandList[con.mode], con.line, arg);
@@ -189,6 +249,7 @@ int isMathorLog() {
 
 int error(char *arg) {
 	if ( com ) return 0;
+	if ( !con.enableExec ) return 0;
 
 	if ( isMathorLog() ) {
 		if ( findseq(arg, single, singleCount) != ERROR ) return 1;	
@@ -207,6 +268,7 @@ int error(char *arg) {
 		}
 	}
 	else 
+		if ( findseq(arg, single, singleCount) != ERROR ) return 1;	
 		if ( !strcmp(commandList[con.mode], arg) && findseq(arg, single, singleCount) == ERROR ) return 0;
 	
 	return 1;

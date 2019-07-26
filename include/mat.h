@@ -4,8 +4,8 @@
 /*
  * Minimalistic AutomaTon language
  * This file is attached to mat.c
- * v0.2.6
- * by Centrix 24.07.2019
+ * v0.3.1
+ * by Centrix 26.07.2019
  */
 
 int findseq(char *str, char *fndlist[], int range);
@@ -29,6 +29,16 @@ void neg(char *arg);
 void module(char *arg);
 void root(char *arg);
 void power(char *arg);
+void bigger(char *arg);
+void biggerOrEq(char *arg);
+void smaller(char *arg);
+void smallerOrEq(char *arg);
+void eq(char *arg);
+void notEq(char *arg);
+void cmpr(char *arg);
+void isTrue(char *arg);
+void isFalse(char *arg);
+void end(char *arg);
 
 int isint(char *tok);
 int error(char *arg);

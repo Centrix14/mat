@@ -6,14 +6,14 @@
 /*
  * mi2.c Interactive Mat interpreter 
  * The main file of the interactive Mat interpreter 
- * v0.2.6
- * by Centrix 24.07.2019
+ * v0.3.1
+ * by Centrix 26.07.2019
  */
 
 int main(int argc, char *argv[]) {
 	char line[256], *tok;
 
-	printf("-- IMI v0.2.6 (Interactive Mat interpreter) by Centrix 24.07.2019 --\n\n");
+	printf("-- IMI v0.3.1 (Interactive Mat interpreter) by Centrix 26.07.2019 --\n\n");
 	while ( 1 ) {
 		tok = gettoken(line, 1);
 

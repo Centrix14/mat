@@ -7,7 +7,10 @@
 
 #define MODE_EMPTY -1
 
-enum states {
+#define TRUE 1
+#define FALSE 0
+
+enum mathStates {
 	ADD = 0,
 	SUBT,
 	MULT,
@@ -28,8 +31,10 @@ typedef struct {
 	int fpos;
 	int acc;
 	int line;
+	int cmpResult;
+	int enableExec;
 } context;
 
-context con = {OFF, MODE_EMPTY, 0, 0, 1};
+context con = {OFF, MODE_EMPTY, 0, 0, 1, 0, 1};
 
 #endif
