@@ -5,7 +5,7 @@ Here you will find a list of documentation for the mat language.
 [Syntax information](syntax.md)  
 
 ## How to download Mat interpreter?
-To download the Mat interpreter, follow [this](https://github.com/Centrix14/mat/releases/tag/v0.2.2sm) link.
+To download the Mat interpreter, follow [this](https://github.com/Centrix14/mat/releases/) link.
 
 ## What I downloaded?
 You have downloaded the development package on mat.  

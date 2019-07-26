@@ -24,7 +24,7 @@ Some text
 And also change the number stored in the accumulator (the accumulator stores the results of all mathematical operations). Initially there was 0, but now the accumulator stores the sum of the numbers 5, 6, 7, 8 and 9, that is 35. You can use the `r` state to verify this.   
 To execute programs on a mat whose code is in the some.mat file, you can use mfi (mat file interpreter), which is called with the `mat` command. Then it turns out the command `mat some.mat`
 
-## States supported mfi interpreter v0.2.x 
+## States supported mfi interpreter v0.3.x 
 ### Mathematical States
   + `+`, `-`, `*`, `/` `^`, `abs`, `neg`, `sqrt` -- These States correspond to their mathematical analog, with one difference, all operations are performed on the integer from the accumulator and the transmitted number. This means that the record +2 is the same as acc = acc + 2, where acc is the number stored in the accumulator.
   + `:` -- This state is used to initialize the accumulator, initially there is 0, but using this state you can change 0 to another number. In general, if you want to change the value to, say, 5, you can simply use the `+5` or `:5` construct. However, i recommend that the second option be used for such purposes.
@@ -40,6 +40,21 @@ To execute programs on a mat whose code is in the some.mat file, you can use mfi
 
 ```
 Explanations. First, we initialize the value of the accumulator, then divide this value by 2 and store it in the accumulator, then multiply it by 50, add 5, subtract 2, (of course, each time we store the value in the accumulator). And then with the help of `r`, we derive the value of the accumulator to the screen.
+  + `>`, `<`, `>=`, `<=`, `=`, `!=` -- These States are used to compare numbers with the value in the battery. After comparison, the logical result (1 - true, 0 - false) of the operation is stored in a special variable cmpResult.
+  **Example**
+```c
+:5>0
+
+```
+Explanations. In this mini program, the battery value (5) is compared with the transmitted number (0). A logical result of the operation is stored in cmpResult.
+
+  + `cmpr` -- This state allows you to display the cmpResult value.
+  **Example**
+```
+:5>0 cmpr
+
+```
+  Explanations. In this mini-program the result of comparison 5 and 0 (1) is displayed.
 ### The rest of the state.
   + `output` -- This state is used to display values on the screen. Note: to move to a new line, just use enter, and to tab, use the corresponding key on the keyboard.
 
@@ -83,6 +98,39 @@ Hi from terminal!
 ```
 
 Note. In the situation when it is impossible to access the terminal, the machine generates an error (see details [here](errorlist.md)).
+
+  + Control structures. In mat, control constructs differ from those in other languages. In General, the if-else expression is organized as follows:
+```c
+Expression (1)
+TRUE (2)
+    ~ some code ~
+FALSE (3)
+    ~ some code ~
+END (4)
+```
+  Explanations. The expression (1) must change the cmpResult value, for example, the expression can be used `>`, `<`, `>=`, `<=`, `!=` `=`. All code after `TRUE` (2) will be executed only if the expression (1) is true. If the expression (1) is false, all code after `FALSE` (3) will be executed. When the if-else block is over, you need to write the `END`command.
+
+  However, need not block `FALSE`, so it can not write, also if not block `FALSE`, then you should not write the command `END`. Thus, the incomplete form of branching looks like this:
+```c
+Expression (1)
+TRUE (2)
+    ~ some code ~
+	
+```
+  Here everything is the same as in full form. Just removed unnecessary items.
+
+**Example**
+```c
+:5>0
+TRUE output_5 bigger than 0
+FALSE output_5 smaller than 0
+END
+```
+  This program will naturally output `5 bigger than 0`. However, it can be optimized in this way:
+```c
+:5>0
+TRUE output_5 bigger than 0
+```
 
 ## Other means
   + Comments. As in normal programming languages, comments in mat do not affect the result and execution of the program. There is only one type of comment in mat -- multiline. The text of the comment is framed by `~` (tilde) on both sides. For example. 

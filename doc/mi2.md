@@ -7,7 +7,7 @@ mi2 -- is an interactive interpreter of the mat language, which can be used to w
 To begin, compile the source code using the make utility, how to do it is told [here](main.md). Then run mi2 command `mi2`.
 
 ## How to use mi2?
-If you did everything correctly after starting mi2 will display information about yourself, then you will see a prompt in the version mi2 v0.2.x it looks like this:
+If you did everything correctly after starting mi2 will display information about yourself, then you will see a prompt in the version mi2 v0.3.x it looks like this:
 
 ```c
 mi2> 
