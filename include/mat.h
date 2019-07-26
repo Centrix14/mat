@@ -4,9 +4,12 @@
 /*
  * Minimalistic AutomaTon language
  * This file is attached to mat.c
- * v0.3.1
+ * v0.3.2
  * by Centrix 26.07.2019
  */
+
+void setPrintError(int newValue);
+void setStopWhenError(int newValue);
 
 int findseq(char *str, char *fndlist[], int range);
 int getCommandType(char *tok);

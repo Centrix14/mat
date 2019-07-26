@@ -10,7 +10,7 @@
 /*
  * Minimalistic AutomaTon language
  * This file contains the Mat interpreter
- * v0.3.1
+ * v0.3.2
  * by Centrix 26.07.2019
  */
 
@@ -22,7 +22,15 @@ void (*funcList[]) (char *) = {add, subt, mult, cdiv, assign, and, or, not, neg,
 char *empty = " \n_";
 char *single[] = {"r", "_!", "neg", "abs", "sqrt", "cmpr", "TRUE", "FALSE"};
 int singleCount = 8; 
-int com = 0;
+int com = 0, printError = 1, stopWhenError = 1;
+
+void setPrintError(int newValue) {
+	printError = newValue;
+}
+
+void setStopWhenError(int newValue) {
+	stopWhenError = newValue;
+}
 
 int findseq(char *str, char *fndlist[], int range) {
 	for (int i = 0; i < range; i++) {
@@ -72,7 +80,7 @@ void mult(char *arg) {
 }
 
 void cdiv(char *arg) {
-	if ( error(arg) )	
+	if ( error(arg) ) 
 		con.acc /= atoi(arg);
 }
 
@@ -248,28 +256,35 @@ int isMathorLog() {
 }
 
 int error(char *arg) {
-	if ( com ) return 0;
-	if ( !con.enableExec ) return 0;
+	if ( com || !con.enableExec ) return 0;
 
 	if ( isMathorLog() ) {
 		if ( findseq(arg, single, singleCount) != ERROR ) return 1;	
 		if ( !strcmp(arg, commandList[con.mode]) || strstr(empty, arg) ) return 0;
+
 		if ( isint(arg) ) {
 			if ( !atoi(arg) && con.mode != ASSIGN && con.mode != AND ) {
-				fprintf(stderr, "\nWarning line %d: operation with 0.\n", con.line);
-				exit(0);
+				if ( printError )	
+					fprintf(stderr, "\nWarning line %d: operation with 0.\n", con.line);
+
+				if ( stopWhenError )
+					exit(0);
 			}
 			return 1;
 		}
 		else {
 			if ( findseq(arg, single, singleCount) != ERROR ) return 1;	
-			typeErrorReport(arg);
-			exit(0);
+			if ( printError )
+				typeErrorReport(arg);
+
+			if ( stopWhenError )
+				exit(0);
 		}
 	}
-	else 
+	else {
 		if ( findseq(arg, single, singleCount) != ERROR ) return 1;	
 		if ( !strcmp(commandList[con.mode], arg) && findseq(arg, single, singleCount) == ERROR ) return 0;
+	}
 	
 	return 1;
 }
