@@ -249,8 +249,8 @@ void typeErrorReport(char *arg) {
 	fprintf(stderr, "\n[%s]: Type error in line %d: expected number but passed `%s`\n", commandList[con.mode], con.line, arg);
 }
 
-int isMathorLog() {
-	if ( con.mode >= 0 && con.mode <= 11 )
+int isReqInt(int mode) {
+	if ( (mode >= ADD && mode <= POW) || (mode >= BIGGER && mode <= NOT_EQ) )
 		return 1;
 	return 0;
 }
@@ -258,35 +258,24 @@ int isMathorLog() {
 int error(char *arg) {
 	if ( com || !con.enableExec ) return 0;
 
-	if ( isMathorLog() ) {
-		if ( findseq(arg, single, singleCount) != ERROR ) return 1;	
-		if ( !strcmp(arg, commandList[con.mode]) || strstr(empty, arg) ) return 0;
+	if ( findseq(arg, single, singleCount) != ERROR ) return 1;
+	if ( !strcmp(commandList[con.mode], arg) ) return 0;
 
-		if ( isint(arg) ) {
-			if ( !atoi(arg) && con.mode != ASSIGN && con.mode != AND ) {
-				if ( printError )	
-					fprintf(stderr, "\nWarning line %d: operation with 0.\n", con.line);
+	if ( isReqInt(con.mode) ) {
+		if ( strstr(empty, arg) ) return 0;
 
-				if ( stopWhenError )
-					exit(0);
-			}
-			return 1;
-		}
+		if ( atoi(arg) || isint(arg) ) return 1;
 		else {
-			if ( findseq(arg, single, singleCount) != ERROR ) return 1;	
-			if ( printError )
-				typeErrorReport(arg);
+			if ( con.mode == ASSIGN || con.mode == AND ) return 1;
 
-			if ( stopWhenError )
-				exit(0);
+			if ( isword(arg) ) {
+				if ( printError )
+					typeErrorReport(arg);
+				if ( stopWhenError )
+					exit(0);	
+			}
 		}
 	}
-	else {
-		if ( findseq(arg, single, singleCount) != ERROR ) return 1;	
-		if ( !strcmp(commandList[con.mode], arg) && findseq(arg, single, singleCount) == ERROR ) return 0;
-	}
-	
-	return 1;
 }
 
 int getCommandOn() {

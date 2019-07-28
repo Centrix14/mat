@@ -22,7 +22,13 @@ enum mathStates {
 	NEG,
 	ABS,
 	ROOT,
-	POW
+	POW,
+	BIGGER = 15,
+	SMALLER,
+	BIGGER_OR_EQ,
+	SMALLER_OR_EQ,
+	EQ,
+	NOT_EQ
 };
 
 typedef struct {
