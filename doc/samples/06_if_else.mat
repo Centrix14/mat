@@ -1,0 +1,15 @@
+:10>6
+
+TRUE
+	output_10 bigger than 6
+FALSE
+	output_10 smaller than 6
+END	
+
+:80=80
+TRUE
+	output_The number 80 is written in the battery
+FALSE
+	output_The number 80 is not written in the battery
+END
+

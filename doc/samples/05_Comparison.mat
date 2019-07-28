@@ -1,0 +1,26 @@
+~
+Sample 5. Comparison operation
+In the language of mat supports the following comparison operations: >, <, >=, <=, =, !=.
+The result of these operations is written to a special variable cmpResult, to display the value of which the cmpr 
+command is used
+~
+:5
+
+output_5 bigger than 0? >0 cmpr
+output
+
+output_5 smaller then 0? <0 cmpr
+output
+
+output_5 equal 0? =0 cmpr
+output
+
+output_5 not equal 0? !=0 cmpr
+output
+
+output_5 bigger or equal 0? >=0 cmpr
+output
+
+output_5 smaller or equal 0? <=0 cmpr
+output
+
