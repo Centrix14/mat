@@ -266,14 +266,14 @@ int error(char *arg) {
 
 		if ( atoi(arg) || isint(arg) ) return 1;
 		else {
-			if ( con.mode == ASSIGN || con.mode == AND ) return 1;
-
 			if ( isword(arg) ) {
 				if ( printError )
 					typeErrorReport(arg);
 				if ( stopWhenError )
 					exit(0);	
 			}
+			
+			if ( con.mode == ASSIGN || con.mode == AND ) return 1;
 		}
 	}
 }
